@@ -26,7 +26,7 @@ class GraphicsController extends Controller
 
              $fileModel = new File;
 
-            if ($file = $request->file('file')) {
+            if ($files = $request->file('file')) {
                 $fileName = time().'_'.$request->file->getClientOriginalName();
                 $filePath = $request->file('file')->storeAs('uploads', $fileName, 'public');
 
@@ -37,7 +37,8 @@ class GraphicsController extends Controller
                 return response()->json([
                     "success" => true,
                     "message" => "File successfully uploaded",
-                    "file" => $file
+                    "fileName" => $fileName,
+                    "filePath" => $filePath
                 ]);
 
             }

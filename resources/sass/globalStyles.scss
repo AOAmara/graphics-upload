@@ -1,0 +1,109 @@
+body {
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin-bottom: 16px;
+
+    @include media-breakpoint-up(lg) {
+        margin-bottom: 32px;
+    }
+}
+
+h1 {
+    font-size: 22px;
+    font-weight: normal;
+    margin-top: 32px;
+
+    @include media-breakpoint-up(lg) {
+        font-size: 32px;
+    }
+}
+
+p {
+    font-family: 'Open Sans', sans-serif;
+}
+
+.no-gutters {
+    margin-right: 0;
+    margin-left: 0;
+
+    > .col,
+    > [class*="col-"] {
+        padding-right: 0;
+        padding-left: 0;
+    }
+}
+
+.uploadWrapper {
+    border: 1px solid $border;
+    padding: 16px 24px 24px;
+
+    @include media-breakpoint-up(lg) {
+        border: none;
+        padding: 0;
+    }
+
+    h3 {
+        color: $primary;
+        font-size: 15px;
+        font-weight: bold;
+    }
+
+    h4 {
+        color: $primary;
+        font-size: 13px;
+        font-weight: bold;
+    }
+
+    .nav-pills {
+        margin-bottom: 32px;
+
+        @include media-breakpoint-up(lg) {
+            margin-bottom: 0;
+        }
+
+        .nav-link {
+            display: flex;
+            flex-direction: column;
+            font-weight: bold;
+            color: $primary;
+            background-color: #F2F2F7;
+            border-radius: 0;
+            padding: 12px 10px;
+            transition: all .5s ease;
+            border-left: 10px solid transparent;
+            margin-bottom: 4px;
+
+            &.active {
+                border-left: 10px solid $primary;
+            }
+
+            span {
+                font-weight: normal;
+            }
+
+            @include media-breakpoint-up(lg) {
+                cursor: pointer;
+            }
+        }
+    }
+
+    .tab-content {
+        @include media-breakpoint-up(lg) {
+            border: 1px solid $border;
+            padding: 48px;
+        }
+    }
+
+    .uploadAreaBox {
+        background-color: #EFEFEF;
+        padding: 24px;
+
+        @include media-breakpoint-up(lg) {
+            max-width: 510px;
+        }
+    }
+}
