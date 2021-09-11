@@ -1,4 +1,5 @@
 .dragNDropArea {
+    cursor: pointer;
     background-image: repeating-linear-gradient(27deg, #707070, #707070 14px, transparent 14px, transparent 40px, #707070 40px),
     repeating-linear-gradient(117deg, #707070, #707070 14px, transparent 14px, transparent 40px, #707070 40px),
     repeating-linear-gradient(207deg, #707070, #707070 14px, transparent 14px, transparent 40px, #707070 40px),
@@ -7,9 +8,17 @@
     background-position: 0 0, 0 0, 100% 0, 0 100%;
     background-repeat: no-repeat;
     padding: 110px 24px 32px 24px;
+    transition: all .4s ease;
+
+    &:hover {
+        background-image: repeating-linear-gradient(27deg, $primary, $primary 14px, transparent 14px, transparent 40px, $primary 40px),
+        repeating-linear-gradient(117deg, $primary, $primary 14px, transparent 14px, transparent 40px, $primary 40px),
+        repeating-linear-gradient(207deg, $primary, $primary 14px, transparent 14px, transparent 40px, $primary 40px),
+        repeating-linear-gradient(297deg, $primary, $primary 14px, transparent 14px, transparent 40px, $primary 40px);
+    }
 
     @include media-breakpoint-up(lg) {
-        padding: 110px 64px 64px;
+        padding: 180px 64px 64px;
     }
 
     p {
@@ -34,14 +43,47 @@
         width: 45px;
         height: 45px;
         background: url('../images/move.svg') no-repeat center / contain;
+
+        @include media-breakpoint-up(lg) {
+            top: 132px;
+        }
     }
 
     .dropbox {
-        text-align: center;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        width: max-content;
+        padding-top: 35px;
+        margin: 32px auto 0 auto;
+
+        @include media-breakpoint-up(lg) {
+            margin: 82px auto 0 auto;
+        }
 
         p {
+            position: absolute;
+            width: max-content;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
             font-size: 12px;
             text-transform: none;
+        }
+
+        .dropbox-button {
+            width: 40px;
+            height: 40px;
+            background: transparent url("../images/dropbox.svg") no-repeat center / contain;
+            border: none;
+            font-size: 0;
+            transition: all .4s ease;
+            transform: scale(1);
+
+            &:hover {
+                transform: scale(1.1);
+            }
         }
     }
 }

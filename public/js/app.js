@@ -3955,9 +3955,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_dropzone__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dropzone */ "./node_modules/react-dropzone/dist/es/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-bootstrap */ "./node_modules/react-bootstrap/esm/ProgressBar.js");
+/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-bootstrap */ "./node_modules/react-bootstrap/esm/ProgressBar.js");
 /* harmony import */ var _AlertDialog__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./AlertDialog */ "./resources/js/components/AlertDialog.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react_dropbox_chooser__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-dropbox-chooser */ "./node_modules/react-dropbox-chooser/dist/react-dropbox-chooser.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -3984,8 +3985,9 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
 function UploadArea() {
-  var fileMaxSize = 200;
+  var appKey = 'kbjkmghx65jo7z9';
 
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0),
       _useState2 = _slicedToArray(_useState, 2),
@@ -4009,22 +4011,23 @@ function UploadArea() {
 
   var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
       _useState10 = _slicedToArray(_useState9, 2),
-      response = _useState10[0],
-      setResponse = _useState10[1];
+      responseErrors = _useState10[0],
+      setResponseErrors = _useState10[1];
 
-  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
+  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
       _useState12 = _slicedToArray(_useState11, 2),
-      responseErrors = _useState12[0],
-      setResponseErrors = _useState12[1];
+      show = _useState12[0],
+      setShow = _useState12[1];
 
-  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
-      _useState14 = _slicedToArray(_useState13, 2),
-      show = _useState14[0],
-      setShow = _useState14[1];
+  function handleSuccess(files) {
+    console.log(files);
+    handleOnDrop(files);
+  }
 
-  var onDrop = (0,react__WEBPACK_IMPORTED_MODULE_0__.useCallback)(function (acceptedFiles) {
+  var handleOnDrop = function handleOnDrop(acceptedFiles) {
     var data = new FormData();
     data.append('file', acceptedFiles[0]);
+    console.log(acceptedFiles[0]);
     var options = {
       onUploadProgress: function onUploadProgress(progressEvent) {
         var loaded = progressEvent.loaded,
@@ -4042,49 +4045,59 @@ function UploadArea() {
         setUploadPercentage(0);
       }, 1000);
       console.log(res.data);
-      setResponse(res.data);
       setShow(true);
       setAlertStatusCode(res.data.statusCode);
       setAlertStatus(res.data.status);
       setAlertMessage(res.data.message);
       setResponseErrors(res.data.errors.file);
+    })["catch"](function (e) {
+      return console.log(e);
     });
-  }, []);
+  };
 
   var _useDropzone = (0,react_dropzone__WEBPACK_IMPORTED_MODULE_1__.useDropzone)({
     accept: 'image/*',
     multiple: false,
-    maxSize: {
-      fileMaxSize: fileMaxSize
-    },
-    onDrop: onDrop
+    onDrop: handleOnDrop
   }),
       getRootProps = _useDropzone.getRootProps,
       getInputProps = _useDropzone.getInputProps;
 
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_AlertDialog__WEBPACK_IMPORTED_MODULE_3__["default"], {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_AlertDialog__WEBPACK_IMPORTED_MODULE_3__["default"], {
       alertStatusCode: alertStatusCode,
       alertStatus: alertStatus,
       alertMessage: alertMessage,
       alertMessageDetails: responseErrors,
       shown: show
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
       className: "uploadAreaBox",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", _objectSpread(_objectSpread({
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", _objectSpread(_objectSpread({
         className: "dragNDropArea"
       }, getRootProps()), {}, {
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", _objectSpread({}, getInputProps())), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("input", _objectSpread({}, getInputProps())), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("p", {
           children: "Upload your graphic file here"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
           className: "dropbox",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("p", {
             children: "or upload from"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
-            children: "Dropbox"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_dropbox_chooser__WEBPACK_IMPORTED_MODULE_4__["default"], {
+            appKey: appKey,
+            success: function success(files) {
+              return handleSuccess(files);
+            },
+            cancel: function cancel() {
+              return console.log('Operation canceled');
+            },
+            multiselect: false,
+            extensions: ['.jpeg', '.png', '.jpg', '.gif', '.svg'],
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("button", {
+              className: "dropbox-button",
+              children: "Dropbox"
+            })
           })]
         })]
-      })), alertStatusCode <= 201 && uploadPercentage > 0 && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_bootstrap__WEBPACK_IMPORTED_MODULE_5__["default"], {
+      })), alertStatusCode <= 201 && uploadPercentage > 0 && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_bootstrap__WEBPACK_IMPORTED_MODULE_6__["default"], {
         now: uploadPercentage
       })]
     })]
@@ -4172,10 +4185,7 @@ function App() {
                     eventKey: "second",
                     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h3", {
                       children: "Upload now your Poster"
-                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-                      className: "uploadAreaBox",
-                      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_components_UploadArea__WEBPACK_IMPORTED_MODULE_2__["default"], {})
-                    })]
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_components_UploadArea__WEBPACK_IMPORTED_MODULE_2__["default"], {})]
                   })]
                 })
               })]
@@ -5058,6 +5068,81 @@ var invariant = function(condition, format, a, b, c, d, e, f) {
 };
 
 module.exports = invariant;
+
+
+/***/ }),
+
+/***/ "./node_modules/load-script/index.js":
+/*!*******************************************!*\
+  !*** ./node_modules/load-script/index.js ***!
+  \*******************************************/
+/***/ ((module) => {
+
+
+module.exports = function load (src, opts, cb) {
+  var head = document.head || document.getElementsByTagName('head')[0]
+  var script = document.createElement('script')
+
+  if (typeof opts === 'function') {
+    cb = opts
+    opts = {}
+  }
+
+  opts = opts || {}
+  cb = cb || function() {}
+
+  script.type = opts.type || 'text/javascript'
+  script.charset = opts.charset || 'utf8';
+  script.async = 'async' in opts ? !!opts.async : true
+  script.src = src
+
+  if (opts.attrs) {
+    setAttributes(script, opts.attrs)
+  }
+
+  if (opts.text) {
+    script.text = '' + opts.text
+  }
+
+  var onend = 'onload' in script ? stdOnEnd : ieOnEnd
+  onend(script, cb)
+
+  // some good legacy browsers (firefox) fail the 'in' detection above
+  // so as a fallback we always set onload
+  // old IE will ignore this and new IE will set onload
+  if (!script.onload) {
+    stdOnEnd(script, cb);
+  }
+
+  head.appendChild(script)
+}
+
+function setAttributes(script, attrs) {
+  for (var attr in attrs) {
+    script.setAttribute(attr, attrs[attr]);
+  }
+}
+
+function stdOnEnd (script, cb) {
+  script.onload = function () {
+    this.onerror = this.onload = null
+    cb(null, script)
+  }
+  script.onerror = function () {
+    // this.onload = null here is necessary
+    // because even IE9 works not like others
+    this.onerror = this.onload = null
+    cb(new Error('Failed to load ' + this.src), script)
+  }
+}
+
+function ieOnEnd (script, cb) {
+  script.onreadystatechange = function () {
+    if (this.readyState != 'complete' && this.readyState != 'loaded') return
+    this.onreadystatechange = null
+    cb(null, script) // there is no way to catch loading errors in IE8
+  }
+}
 
 
 /***/ }),
@@ -33852,6 +33937,140 @@ if (false) {} else {
   module.exports = __webpack_require__(/*! ./cjs/react-dom.development.js */ "./node_modules/react-dom/cjs/react-dom.development.js");
 }
 
+
+/***/ }),
+
+/***/ "./node_modules/react-dropbox-chooser/dist/react-dropbox-chooser.js":
+/*!**************************************************************************!*\
+  !*** ./node_modules/react-dropbox-chooser/dist/react-dropbox-chooser.js ***!
+  \**************************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _loadScript = __webpack_require__(/*! load-script */ "./node_modules/load-script/index.js");
+
+var _loadScript2 = _interopRequireDefault(_loadScript);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var DROPBOX_SDK_URL = 'https://www.dropbox.com/static/api/2/dropins.js';
+var SCRIPT_ID = 'dropboxjs';
+
+var scriptLoadingStarted = false;
+
+// read more
+// https://www.dropbox.com/developers/chooser
+
+var DropboxChooser = function (_Component) {
+  _inherits(DropboxChooser, _Component);
+
+  function DropboxChooser(props) {
+    _classCallCheck(this, DropboxChooser);
+
+    var _this = _possibleConstructorReturn(this, (DropboxChooser.__proto__ || Object.getPrototypeOf(DropboxChooser)).call(this, props));
+
+    _this.onChoose = _this.onChoose.bind(_this);
+    return _this;
+  }
+
+  _createClass(DropboxChooser, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      if (!this.isDropboxReady() && !scriptLoadingStarted) {
+        scriptLoadingStarted = true;
+        (0, _loadScript2.default)(DROPBOX_SDK_URL, {
+          attrs: {
+            id: SCRIPT_ID,
+            'data-app-key': this.props.appKey
+          }
+        });
+      }
+    }
+  }, {
+    key: 'isDropboxReady',
+    value: function isDropboxReady() {
+      return !!window.Dropbox;
+    }
+  }, {
+    key: 'onChoose',
+    value: function onChoose() {
+      if (!this.isDropboxReady() || this.props.disabled) {
+        return null;
+      }
+
+      var _props = this.props,
+          success = _props.success,
+          cancel = _props.cancel,
+          linkType = _props.linkType,
+          multiselect = _props.multiselect,
+          extensions = _props.extensions;
+
+
+      window.Dropbox.choose({
+        success: success,
+        cancel: cancel,
+        linkType: linkType,
+        multiselect: multiselect,
+        extensions: extensions
+      });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'div',
+        { onClick: this.onChoose },
+        this.props.children ? this.props.children : _react2.default.createElement(
+          'button',
+          null,
+          'Open dropbox chooser'
+        )
+      );
+    }
+  }]);
+
+  return DropboxChooser;
+}(_react.Component);
+
+DropboxChooser.propTypes = {
+  children: _propTypes2.default.node,
+  appKey: _propTypes2.default.string.isRequired,
+  success: _propTypes2.default.func.isRequired,
+  cancel: _propTypes2.default.func,
+  linkType: _propTypes2.default.oneOf(['preview', 'direct']),
+  multiselect: _propTypes2.default.bool,
+  extensions: _propTypes2.default.arrayOf(_propTypes2.default.string),
+  disabled: _propTypes2.default.bool
+};
+DropboxChooser.defaultProps = {
+  cancel: function cancel() {},
+  linkType: 'preview',
+  multiselect: false,
+  disabled: false
+};
+exports["default"] = DropboxChooser;
 
 /***/ }),
 

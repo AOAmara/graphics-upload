@@ -1,28 +1,33 @@
-import React, {useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {useDropzone} from 'react-dropzone'
 import axios from "axios";
 import {ProgressBar} from 'react-bootstrap';
 import AlertDialog from "./AlertDialog";
 import DropboxChooser from 'react-dropbox-chooser';
 
-function UploadArea() {
+function UploadAreaFromDropbox() {
     const appKey = 'kbjkmghx65jo7z9';
+    const fileMaxSize = 200;
     const [uploadPercentage, setUploadPercentage] = useState(0);
     const [alertStatusCode, setAlertStatusCode] = useState();
     const [alertStatus, setAlertStatus] = useState();
     const [alertMessage, setAlertMessage] = useState();
+    const [response, setResponse] = useState("");
     const [responseErrors, setResponseErrors] = useState("");
     const [show, setShow] = useState(false);
 
-    function handleSuccess(files) {
-        console.log(files);
-        handleOnDrop(files);
-    }
+    // const [dropBoxFiles, setDropBoxFiles] = useState([]);
+    let dropBoxFiles = [];
+    const handleSuccess = (files) => {
+        dropBoxFiles = files;
+        console.log(dropBoxFiles);
+        return dropBoxFiles;
+    };
 
-    const handleOnDrop = (acceptedFiles) => {
+    const onDrop = useCallback(acceptedFiles => {
         let data = new FormData();
-        data.append('file', acceptedFiles[0]);
-        console.log(acceptedFiles[0]);
+        data.append('file', acceptedFiles[0] || dropBoxFiles);
+        console.log(`files passed to dropZone: ${dropBoxFiles}`);
 
         const options = {
             onUploadProgress: (progressEvent) => {
@@ -33,13 +38,14 @@ function UploadArea() {
                 }
             }
         };
-
         axios.post('http://127.0.0.1:8000/api/upload-file', data, options).then(res => {
             setUploadPercentage(100);
             setTimeout(() => {
                 setUploadPercentage(0)
             }, 1000);
+
             console.log(res.data);
+            setResponse(res.data);
             setShow(true);
             setAlertStatusCode(res.data.statusCode);
             setAlertStatus(res.data.status);
@@ -47,12 +53,13 @@ function UploadArea() {
             setResponseErrors(res.data.errors.file);
 
         }).catch(e=> console.log(e))
-    };
+    }, []);
 
     const {getRootProps, getInputProps} = useDropzone({
         accept: 'image/*',
         multiple: false,
-        onDrop: handleOnDrop
+        maxSize: {fileMaxSize},
+        onDrop
     });
 
     return (
@@ -70,11 +77,11 @@ function UploadArea() {
                         <p>or upload from</p>
                         <DropboxChooser
                             appKey={appKey}
-                            success={files => handleSuccess(files)}
+                            success={handleSuccess}
                             cancel={() => console.log('Operation canceled')}
                             multiselect={false}
                             extensions={['.jpeg', '.png', '.jpg', '.gif', '.svg']} >
-                            <button className="dropbox-button">Dropbox</button>
+                            <div className="dropbox-button">Click me! Try cloning onDrop method and trigger it after dropbox success event</div>
                         </DropboxChooser>
                     </div>
                 </div>
@@ -84,5 +91,5 @@ function UploadArea() {
     );
 }
 
-export default UploadArea;
+export default UploadAreaFromDropbox;
 

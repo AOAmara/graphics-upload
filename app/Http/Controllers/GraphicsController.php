@@ -17,7 +17,7 @@ class GraphicsController extends Controller
         public function fileUpload(Request $request) {
             $response = [];
             $validator = Validator::make($request->all(),[
-                  'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:20000',
+                  'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2000',
             ]);
 
             if($validator->fails()) {

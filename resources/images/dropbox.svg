@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40">
+  <g id="Group_1491" data-name="Group 1491" transform="translate(-363 -357)">
+    <rect id="Rectangle_1122" data-name="Rectangle 1122" width="40" height="40" rx="10" transform="translate(363 357)" fill="#fff"/>
+    <g id="dropbox" transform="translate(371 365.5)">
+      <path id="Path_1168" data-name="Path 1168" d="M12,4.483l7.119,4.246L24,4.954,16.939.5Z" fill="#1976d2"/>
+      <path id="Path_1169" data-name="Path 1169" d="M12,4.485,7.06.5,0,4.953,4.883,8.73Z" fill="#1976d2"/>
+      <path id="Path_1170" data-name="Path 1170" d="M12,12.976l4.939,3.983L24,12.506,19.117,8.729,12,12.975,4.881,8.729,0,12.506l7.06,4.453Z" fill="#1976d2"/>
+      <path id="Path_1171" data-name="Path 1171" d="M19.5,19.187V17.062l-2.2,1.39h0c-.828.527-1.2-.536-5.3-3.6-4.161,3.128-4.473,4.12-5.3,3.6L4.5,17.063v2.124L12.016,23.5Z" fill="#1976d2"/>
+    </g>
+  </g>
+</svg>

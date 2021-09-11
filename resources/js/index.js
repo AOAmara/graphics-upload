@@ -37,9 +37,7 @@ function App() {
                                         </Tab.Pane>
                                         <Tab.Pane eventKey="second">
                                             <h3>Upload now your Poster</h3>
-                                            <div className="uploadAreaBox">
-                                                <UploadArea />
-                                            </div>
+                                            <UploadArea />
                                         </Tab.Pane>
                                     </Tab.Content>
                                 </Col>

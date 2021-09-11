@@ -11391,15 +11391,20 @@ p {
 }
 
 .dragNDropArea {
+  cursor: pointer;
   background-image: repeating-linear-gradient(27deg, #707070, #707070 14px, transparent 14px, transparent 40px, #707070 40px), repeating-linear-gradient(117deg, #707070, #707070 14px, transparent 14px, transparent 40px, #707070 40px), repeating-linear-gradient(207deg, #707070, #707070 14px, transparent 14px, transparent 40px, #707070 40px), repeating-linear-gradient(297deg, #707070, #707070 14px, transparent 14px, transparent 40px, #707070 40px);
   background-size: 1px 100%, 100% 1px, 1px 100%, 100% 1px;
   background-position: 0 0, 0 0, 100% 0, 0 100%;
   background-repeat: no-repeat;
   padding: 110px 24px 32px 24px;
+  transition: all 0.4s ease;
+}
+.dragNDropArea:hover {
+  background-image: repeating-linear-gradient(27deg, #0C5081, #0C5081 14px, transparent 14px, transparent 40px, #0C5081 40px), repeating-linear-gradient(117deg, #0C5081, #0C5081 14px, transparent 14px, transparent 40px, #0C5081 40px), repeating-linear-gradient(207deg, #0C5081, #0C5081 14px, transparent 14px, transparent 40px, #0C5081 40px), repeating-linear-gradient(297deg, #0C5081, #0C5081 14px, transparent 14px, transparent 40px, #0C5081 40px);
 }
 @media (min-width: 992px) {
   .dragNDropArea {
-    padding: 110px 64px 64px;
+    padding: 180px 64px 64px;
   }
 }
 .dragNDropArea p {
@@ -11425,12 +11430,49 @@ p {
   height: 45px;
   background: url(/images/move.svg?1323b6cb35fe6ec2f58c1b1d53a8adcf) no-repeat center/contain;
 }
+@media (min-width: 992px) {
+  .dragNDropArea:before {
+    top: 132px;
+  }
+}
 .dragNDropArea .dropbox {
-  text-align: center;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  padding-top: 35px;
+  margin: 32px auto 0 auto;
+}
+@media (min-width: 992px) {
+  .dragNDropArea .dropbox {
+    margin: 82px auto 0 auto;
+  }
 }
 .dragNDropArea .dropbox p {
+  position: absolute;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
   font-size: 12px;
   text-transform: none;
+}
+.dragNDropArea .dropbox .dropbox-button {
+  width: 40px;
+  height: 40px;
+  background: transparent url(/images/dropbox.svg?2afaf0fc61bc33f08502b43f4c203830) no-repeat center/contain;
+  border: none;
+  font-size: 0;
+  transition: all 0.4s ease;
+  transform: scale(1);
+}
+.dragNDropArea .dropbox .dropbox-button:hover {
+  transform: scale(1.1);
 }
 
 .alert {
