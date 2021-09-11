@@ -6,17 +6,42 @@
     background-size: 1px 100%, 100% 1px, 1px 100% , 100% 1px;
     background-position: 0 0, 0 0, 100% 0, 0 100%;
     background-repeat: no-repeat;
-    padding: 48px 24px;
+    padding: 110px 24px 32px 24px;
 
     @include media-breakpoint-up(lg) {
-        padding: 80px 64px;
+        padding: 110px 64px 64px;
     }
 
     p {
         font-family: 'Open Sans', sans-serif;
-        font-size: 16px;
+        font-size: 14px;
         font-weight: bold;
         text-transform: uppercase;
         color: $primary;
+        text-align: center;
+
+        @include media-breakpoint-up(lg) {
+            font-size: 16px;
+        }
+    }
+
+    &:before {
+        position: absolute;
+        content: '';
+        top: 76px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 45px;
+        height: 45px;
+        background: url('../images/move.svg') no-repeat center / contain;
+    }
+
+    .dropbox {
+        text-align: center;
+
+        p {
+            font-size: 12px;
+            text-transform: none;
+        }
     }
 }

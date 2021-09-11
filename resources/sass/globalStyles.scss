@@ -99,11 +99,21 @@ p {
     }
 
     .uploadAreaBox {
+        position: relative;
         background-color: #EFEFEF;
         padding: 24px;
 
         @include media-breakpoint-up(lg) {
             max-width: 510px;
+        }
+
+        .progress {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: 4px;
+            border-radius: 0;
         }
     }
 }

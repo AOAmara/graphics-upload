@@ -39,7 +39,6 @@ function App() {
                                             <h3>Upload now your Poster</h3>
                                             <div className="uploadAreaBox">
                                                 <UploadArea />
-                                                <p>Upload from Dropbox using the Api goes here...!</p>
                                             </div>
                                         </Tab.Pane>
                                     </Tab.Content>

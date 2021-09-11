@@ -17,11 +17,15 @@ class GraphicsController extends Controller
         public function fileUpload(Request $request) {
             $response = [];
             $validator = Validator::make($request->all(),[
-                  'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                  'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:20000',
             ]);
 
             if($validator->fails()) {
-                return response()->json(['error'=>$validator->errors()], 401);
+                return response()->json([
+                "statusCode" => "401",
+                "status" => "failed",
+                "message" => "Validation error",
+                "errors" => $validator->errors()]);
              }
 
              $fileModel = new File;
@@ -34,11 +38,13 @@ class GraphicsController extends Controller
                 $fileModel->file_path = '/storage/' . $filePath;
                 $fileModel->save();
 
+
+
                 return response()->json([
-                    "success" => true,
+                    "statusCode" => "200",
+                    "status" => "success",
                     "message" => "File successfully uploaded",
-                    "fileName" => $fileName,
-                    "filePath" => $filePath
+                    "fileInfo" => $fileModel
                 ]);
 
             }

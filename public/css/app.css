@@ -11372,6 +11372,7 @@ p {
   }
 }
 .uploadWrapper .uploadAreaBox {
+  position: relative;
   background-color: #EFEFEF;
   padding: 24px;
 }
@@ -11380,23 +11381,82 @@ p {
     max-width: 510px;
   }
 }
+.uploadWrapper .uploadAreaBox .progress {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 4px;
+  border-radius: 0;
+}
 
 .dragNDropArea {
   background-image: repeating-linear-gradient(27deg, #707070, #707070 14px, transparent 14px, transparent 40px, #707070 40px), repeating-linear-gradient(117deg, #707070, #707070 14px, transparent 14px, transparent 40px, #707070 40px), repeating-linear-gradient(207deg, #707070, #707070 14px, transparent 14px, transparent 40px, #707070 40px), repeating-linear-gradient(297deg, #707070, #707070 14px, transparent 14px, transparent 40px, #707070 40px);
   background-size: 1px 100%, 100% 1px, 1px 100%, 100% 1px;
   background-position: 0 0, 0 0, 100% 0, 0 100%;
   background-repeat: no-repeat;
-  padding: 48px 24px;
+  padding: 110px 24px 32px 24px;
 }
 @media (min-width: 992px) {
   .dragNDropArea {
-    padding: 80px 64px;
+    padding: 110px 64px 64px;
   }
 }
 .dragNDropArea p {
   font-family: "Open Sans", sans-serif;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: bold;
   text-transform: uppercase;
   color: #0C5081;
+  text-align: center;
+}
+@media (min-width: 992px) {
+  .dragNDropArea p {
+    font-size: 16px;
+  }
+}
+.dragNDropArea:before {
+  position: absolute;
+  content: "";
+  top: 76px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 45px;
+  height: 45px;
+  background: url(/images/move.svg?1323b6cb35fe6ec2f58c1b1d53a8adcf) no-repeat center/contain;
+}
+.dragNDropArea .dropbox {
+  text-align: center;
+}
+.dragNDropArea .dropbox p {
+  font-size: 12px;
+  text-transform: none;
+}
+
+.alert {
+  top: 0;
+  right: 0;
+  left: 0;
+  max-width: 510px;
+  border-radius: 0;
+  border: none;
+}
+.alert.alert-success .alert-heading {
+  color: #227444;
+}
+.alert.alert-danger .alert-heading {
+  color: #881f1c;
+}
+.alert .alert-heading {
+  font-family: "open-sans", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  text-transform: capitalize;
+  margin-bottom: 16px;
+}
+.alert p {
+  margin-bottom: 8px;
+}
+.alert p:last-of-type {
+  margin-bottom: 0;
 }
